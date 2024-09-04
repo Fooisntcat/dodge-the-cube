@@ -79,3 +79,14 @@ while running:
 
     # Update the display
     pygame.display.update() 
+
+    # Limit the frame rate
+    clock.tick(60)
+
+# Show final score
+font = pygame.font.Font(None, 72)
+text = font.render("Game Over! Score: " + str(score), True, black)
+screen.blit(text, (screen_width // 2 - text.get_width() // 2, screen_height // 2 - text.get_height() // 2))
+pygame.display.update() 
+
+pygame.time.wait(2000) 
