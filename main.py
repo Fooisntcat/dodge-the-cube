@@ -90,3 +90,5 @@ screen.blit(text, (screen_width // 2 - text.get_width() // 2, screen_height // 2
 pygame.display.update() 
 
 pygame.time.wait(2000) 
+
+pygame.quit()
