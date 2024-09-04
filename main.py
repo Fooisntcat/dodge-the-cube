@@ -49,3 +49,33 @@ while running:
 
     if keys[pygame.K_DOWN] and player_y < screen_height - player_size:
         player_y += player_vel
+
+    # Generate obstacles
+    if random.randint(0, 100) < 5:
+        obstacles.append([screen_width, random.randint(0, screen_height - obstacle_size)])
+
+    # Move obstacles and check for collisions
+    for obstacle in obstacles:
+        obstacle[0] -= obstacle_speed
+        if player_x + player_size > obstacle[0] and player_x < obstacle[0] + obstacle_size:
+            if player_y + player_size > obstacle[1] and player_y < obstacle[1] + obstacle_size:
+                running = False
+        if obstacle[0] < 0:
+            obstacles.remove(obstacle)
+            score += 1
+
+    # Fill the screen with white
+    screen.fill(white)
+
+    # Draw the player and obstacles
+    pygame.draw.rect(screen, black, (player_x, player_y, player_size, player_size))
+    for obstacle in obstacles:
+        pygame.draw.rect(screen, red, (obstacle[0], obstacle[1], obstacle_size, obstacle_size))
+
+    # Draw the score
+    font = pygame.font.Font(None, 36)
+    text = font.render("Score: " + str(score), True, black)
+    screen.blit(text, (10, 10))
+
+    # Update the display
+    pygame.display.update() 
